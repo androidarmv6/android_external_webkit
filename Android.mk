@@ -304,7 +304,9 @@ endif
 # need a flag to tell the C side when we're on devices with large memory
 # budgets (i.e. larger than the low-end devices that initially shipped)
 ifeq ($(ARCH_ARM_HAVE_VFP),true)
-LOCAL_CFLAGS += -DANDROID_LARGE_MEMORY_DEVICE
+	ifneq ($(TARGET_ARCH_LOWMEM),true)
+		LOCAL_CFLAGS += -DANDROID_LARGE_MEMORY_DEVICE
+	endif
 endif
 
 ifeq ($(TARGET_ARCH),x86)
